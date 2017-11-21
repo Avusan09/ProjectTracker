@@ -41,11 +41,17 @@ AppAsset::register($this);
     </div>
 </div>
 
+<div class="development" style="position: fixed;bottom: 10px;right:20px">
+
+    <div class="jumbotron z-depth-4" style="width: 300px">
+        <h4 class="text-center">Development in progress</h4>
+    </div>
+</div>
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Rakesh Shrestha <?= date('Y') +1 ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+
     </div>
 </footer>
 

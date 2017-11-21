@@ -1,6 +1,6 @@
 <nav class="blue-grey">
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo left">Logo</a>
+        <a href="/pt/web" class="brand-logo left">Project Tracker</a>
 
 
         <ul class="right hide-on-med-and-down">
