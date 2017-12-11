@@ -10,7 +10,10 @@ $config = [
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
+            'admins' => ['admin'],
+
         ],
+        'rbac' => 'dektrium\rbac\RbacWebModule',
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -36,10 +39,17 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'aga@siemseverest.com',
-                'password' => 'siemseverest001',
+                'username' => 'carefreeav09@gmail.com',
+                'password' => 'facelessvoid',
                 'port' => '587',
                 'encryption' => 'tls',
+                'streamOptions' => [ 'ssl' =>
+                        [ 'allow_self_signed' => true,
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                        ],
+]
+
             ],
         ],
         'log' => [
@@ -65,13 +75,13 @@ $config = [
 ];
 
 if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-//    $config['bootstrap'][] = 'debug';
-//    $config['modules']['debug'] = [
-//        'class' => 'yii\debug\Module',
-//        // uncomment the following to add your IP if you are not connecting from localhost.
-//        //'allowedIPs' => ['127.0.0.1', '::1'],
 
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' => 'yii\debug\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        //'allowedIPs' => ['127.0.0.1', '::1'],
+        ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [

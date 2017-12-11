@@ -18,8 +18,8 @@ class StudentSearch extends Student
     public function rules()
     {
         return [
-            [['id', 'roll', 'batch', 'project_id'], 'integer'],
-            [['name', 'email'], 'safe'],
+            [['id', 'uid', 'batch', 'roll'], 'integer'],
+            [['name', 'semail'], 'safe'],
         ];
     }
 
@@ -60,13 +60,13 @@ class StudentSearch extends Student
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'roll' => $this->roll,
+            'uid' => $this->uid,
             'batch' => $this->batch,
-            'project_id' => $this->project_id,
+            'roll' => $this->roll,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'semail', $this->semail]);
 
         return $dataProvider;
     }

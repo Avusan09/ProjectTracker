@@ -21,7 +21,7 @@
                     <?php }
                     else
                     { ?>
-                        <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("profile") ?> ">
+                        <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("user/" . Yii::$app->getUser()->id . " " ) ?> ">
                             <?= ucfirst((Yii::$app->user->identity->username)) ?>
                         </a>
 

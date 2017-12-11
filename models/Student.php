@@ -8,15 +8,11 @@ use Yii;
  * This is the model class for table "student".
  *
  * @property int $id
+ * @property int $uid
  * @property string $name
- * @property int $roll
- * @property string $email
+ * @property string $semail
  * @property int $batch
- * @property int $project_id
- *
- * @property Batch[] $batches
- * @property MidTerm[] $midTerms
- * @property Supervisor[] $supervisors
+ * @property int $roll
  */
 class Student extends \yii\db\ActiveRecord
 {
@@ -34,9 +30,9 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'roll', 'email', 'batch'], 'required'],
-            [['roll', 'batch', 'project_id'], 'integer'],
-            [['name', 'email'], 'string', 'max' => 255],
+            [['name', 'semail', 'batch', 'roll'], 'required'],
+            [['uid', 'batch', 'roll'], 'integer'],
+            [['name', 'semail'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,38 +43,29 @@ class Student extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'uid' => 'Uid',
             'name' => 'Name',
-            'roll' => 'Roll',
-            'email' => 'Email',
+            'semail' => 'Semail',
             'batch' => 'Batch',
-            'project_id' => 'Project ID',
+            'roll' => 'Roll',
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getBatches()
+    public function beforeSave($insert)
     {
-        return $this->hasMany(Batch::className(), ['sid' => 'id']);
-    }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMidTerms()
-    {
-        return $this->hasMany(MidTerm::className(), ['sid' => 'id']);
-    }
+        $email = \dektrium\user\models\User::find()->all();
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->name = Yii::$app->getUser()->identity;
+                $this->uid = Yii::$app->getUser()->id;
+                $this->semail = Yii::$app->getUser()->email;
+            }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSupervisors()
-    {
-        return $this->hasMany(Supervisor::className(), ['s_id' => 'id']);
+            return true;
+        }
+        return false;
     }
-
     /**
      * @inheritdoc
      * @return StudentQuery the active query used by this AR class.

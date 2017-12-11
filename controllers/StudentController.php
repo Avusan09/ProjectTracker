@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use dektrium\user\models\User;
 use Yii;
 use app\models\Student;
 use app\models\StudentSearch;
@@ -37,10 +38,12 @@ class StudentController extends Controller
     {
         $searchModel = new StudentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $user = User::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'user' => $user,
         ]);
     }
 
