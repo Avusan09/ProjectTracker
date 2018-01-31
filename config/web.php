@@ -11,6 +11,9 @@ $config = [
         'user' => [
             'class' => 'dektrium\user\Module',
             'admins' => ['admin'],
+            'enableConfirmation' => 'false',
+            'enableUnconfirmedLogin' => 'true',
+
 
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule',
@@ -20,6 +23,15 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+
+        'view'=> [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views' => '@app/views/user'
+                                ],
+                    ],
+                ],
+                
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'zLPIA2LQ_j5dmC_kKY8K6u8QD0HAIAoY',

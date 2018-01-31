@@ -49,7 +49,7 @@ AppAsset::register($this);
 <!--</div>-->
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Rakesh Shrestha <?= date('Y') +1 ?></p>
+        <p class="pull-left">&copy; CarefreeAV <?= date('Y')  ?></p>
 
 
     </div>

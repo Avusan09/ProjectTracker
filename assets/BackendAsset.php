@@ -21,6 +21,7 @@ class BackendAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/materialize.css',
+        'https://fonts.googleapis.com/icon?family=Material+Icons',
 
     ];
     public $js = [

@@ -6,9 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Documentation */
 
 $this->title = 'Update Documentation: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Documentations', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+
 ?>
 <div class="documentation-update">
 

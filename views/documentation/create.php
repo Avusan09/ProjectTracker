@@ -6,13 +6,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Documentation */
 
-$this->title = 'Create Documentation';
-$this->params['breadcrumbs'][] = ['label' => 'Documentations', 'url' => ['index']];
+$this->title = 'Upload your Document ';
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="documentation-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
 
     <?= $this->render('_form', [
         'model' => $model,

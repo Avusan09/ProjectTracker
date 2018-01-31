@@ -15,6 +15,8 @@ use yii\filters\VerbFilter;
  */
 class ProjectController extends Controller
 {
+
+
     /**
      * @inheritdoc
      */
@@ -27,6 +29,7 @@ class ProjectController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+
         ];
     }
 
@@ -37,14 +40,18 @@ class ProjectController extends Controller
     public function actionIndex()
     {
 
-        $searchModel = new ProjectSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $searchModel = new ProjectSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
 
-        ]);
+            ]);
+
+
+
+
     }
 
     /**
@@ -98,7 +105,7 @@ class ProjectController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -36,7 +36,7 @@ class MidTerm extends \yii\db\ActiveRecord
         return [
             [['document'], 'required'],
             [['pid', 'marks',  'accepted', 'uid'], 'integer'],
-            [['remark', 'document'], 'string'],
+            [['remarks', 'document'], 'string'],
             [['pid'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['pid' => 'id']],
             [['uid'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['uid' => 'id']],
         ];

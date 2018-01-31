@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/materialize.css',
         'https://fonts.googleapis.com/icon?family=Material+Icons',
+        'css/style.css'
 
 
     ];

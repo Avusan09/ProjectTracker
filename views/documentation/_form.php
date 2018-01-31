@@ -14,11 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'document')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'remarks')->textarea(['rows' => 6]) ?>
+    <?php if(Yii::$app->user->can('evaluator')) { ?>
 
-    <?= $form->field($model, 'marks')->textInput() ?>
+        <?= $form->field($model, 'marks')->textInput() ?>
 
-    <?= $form->field($model, 'accepted')->textInput() ?>
+        <?= $form->field($model, 'remarks')->textarea(['rows' => 2]) ?>
+
+        <?= $form->field($model, 'accepted')->textInput() ?>
+
+    <?php } ?>
 
 
 

@@ -10,25 +10,34 @@
                     <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("/user/login") ?> ">Login</a>
                 </li>
             <?php } else {?>
+                <li>
+                    <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("/project/index") ?> ">
+                        <?= "Projects"; ?>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <?php  if(Yii::$app->user->can('admin'))
                     { ?>
-                        <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("admin/index") ?> ">
+                        <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("/backend/index") ?> ">
                             <?= ucfirst((Yii::$app->user->identity->username)) ?>
                         </a>
+
+
 
                     <?php }
                     else
                     { ?>
-                        <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("user/" . Yii::$app->getUser()->id . " " ) ?> ">
+                        <a class="nav-link" href="<?= \yii\helpers\Url::toRoute("/user/" . Yii::$app->getUser()->id . " " ) ?> ">
                             <?= ucfirst((Yii::$app->user->identity->username)) ?>
                         </a>
+
 
                     <?php } ?>
 
 
                 </li>
+
                 <li>
                     <a class="nav-link" data-method="post" href="<?= \yii\helpers\Url::toRoute("/user/logout") ?> ">
                         Logout

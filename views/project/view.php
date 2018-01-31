@@ -11,9 +11,30 @@ $this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-view">
-
+    <?php
+    if (Yii::$app->user->can('student')) {
+    ?>
+    <style>
+        a.same-user{
+            display: none;
+        }
+    </style>
+    <?php }
+    ?>
     <h4><?= Html::encode($this->title) ?></h4>
+    <?php
+    $userid = Yii::$app->getUser()->id;
 
+    if ($userid == $model->uid){
+
+
+    ?>
+        <style>
+            a.same-user
+            {
+                display: inline;
+            }
+        </style>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -25,12 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?php
+    <?php }
 
-    echo $model->name . "<br>";
-    echo $model->description . "<br>";
-    echo $model->sup_name . "<br>";
-    echo Yii::$app->user->identity->username;
+
+    echo "Description: " .$model->description . "<br>";
+    echo "Supervisor: " . $model->sup_name . "<br>";
+
 
     ?>
 
@@ -44,25 +65,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">Title Defence</span>
-                        <p>Title Defence. <br>
-                            Accepted :
+                        <?php
+                        $tid = \app\models\TitleDefence::find()->where(['pid'=>$id])->one();
+
+                        if($tid)
+                        { ?>
+                        <p>Marks:  <?= $tid->marks; ?> <br>
+                            Accepted  <?= $tid->accepted; ?>:
                         </p>
+
+
+
+
                     </div>
                     <div class="card-action">
-                        <?php
-                        $title = \app\models\TitleDefence::find()->where(['pid'=>$id])->one();
-                        if($title)
-                        {
 
-                        $tid = $title->id;
-                        ?>
-                        <a href="<?= \yii\helpers\Url::toRoute('/title-defence/view?id=' .  $tid . ' ') ?>">View Status</a>
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/title-defence/view?id=' .  $tid->id . ' ') ?>">View Status</a>
 
                         <?php }
                         else
                         {?>
 
-                        <a href="<?= \yii\helpers\Url::toRoute('/title-defence/create') ?>">View Status</a>
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/title-defence/create') ?>">View Status</a>
                         <?php }
                         ?>
 
@@ -76,27 +100,29 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title">Mid Defence</span>
-                    <p>Mid Defence<br>
-                        Accepted :
-                    </p>
-                </div>
-                <div class="card-action">
                     <?php
                     $mid = \app\models\MidTerm::find()->where(['pid'=>$id])->one();
-                    if($mid)
-                    {
+                     if($mid)
+                        { ?>
+                        <p>Marks:  <?= $mid->marks; ?> <br>
+                            Accepted  <?= $mid->accepted; ?>:
+                        </p>
 
-                        $mid = $mid->id;
+
+
+
+                    </div>
+                    <div class="card-action">
+
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/mid-term/view?id=' .  $mid->id . ' ') ?>">View Status</a>
+
+                        <?php }
+                        else
+                        {?>
+
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/mid-term/create') ?>">View Status</a>
+                        <?php }
                         ?>
-                        <a href="<?= \yii\helpers\Url::toRoute('/mid-term/view?id=' .  $mid . ' ') ?>">View Status</a>
-
-                    <?php }
-                    else
-                    {?>
-
-                        <a href="<?= \yii\helpers\Url::toRoute('/mid-term/create') ?>">View Status</a>
-                    <?php }
-                    ?>
 
 
 
@@ -108,28 +134,29 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title">Final Defence</span>
-                    <p>Final Defence. <br>
-                        Accepted :
-                    </p>
-                </div>
-                <div class="card-action">
                     <?php
-                    $final = \app\models\FinalTerm::find()->where(['pid'=>$id])->one();
-                    if($final)
-                    {
+                    $fid = \app\models\FinalTerm::find()->where(['pid'=>$id])->one(); 
+                    if($fid)
+                        { ?>
+                        <p>Marks:  <?= $fid->marks; ?> <br>
+                            Accepted  <?= $fid->accepted; ?>:
+                        </p>
 
-                        $fid = $final->id;
+
+
+
+                    </div>
+                    <div class="card-action">
+
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/mid-term/view?id=' .  $fid->id . ' ') ?>">View Status</a>
+
+                        <?php }
+                        else
+                        {?>
+
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/mid-term/create') ?>">View Status</a>
+                        <?php }
                         ?>
-                        <a href="<?= \yii\helpers\Url::toRoute('/final-term/view?id=' .  $fid . ' ') ?>">View Status</a>
-
-                    <?php }
-                    else
-                    {?>
-
-                        <a href="<?= \yii\helpers\Url::toRoute('/final-term/create') ?>">View Status</a>
-                    <?php }
-                    ?>
-
 
 
 
@@ -140,32 +167,54 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title">Documentation</span>
-                    <p>Documentation<br>
-                        Accepted :
-                    </p>
-                </div>
-                <div class="card-action">
                     <?php
                     $doc = \app\models\Documentation::find()->where(['pid'=>$id])->one();
-                    if($doc)
-                    {
+                     if($doc)
+                        { ?>
+                        <p>Marks:  <?= $doc->marks; ?> <br>
+                            Accepted  <?= $doc->accepted; ?>:
+                        </p>
 
-                        $doc = $doc->id;
+
+
+
+                    </div>
+                    <div class="card-action">
+
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/mid-term/view?id=' .  $doc->id . ' ') ?>">View Status</a>
+
+                        <?php }
+                        else
+                        {?>
+
+                        <a class="same-user" href="<?= \yii\helpers\Url::toRoute('/mid-term/create') ?>">View Status</a>
+                        <?php }
                         ?>
-                        <a href="<?= \yii\helpers\Url::toRoute('/documentation/view?id=' .  $doc . ' ') ?>">View Status</a>
-
-                    <?php }
-                    else
-                    {?>
-
-                        <a href="<?= \yii\helpers\Url::toRoute('/documentation/create') ?>">View Status</a>
-                    <?php }
-                    ?>
 
 
 
 
                 </div>
+            </div>
+        </div>
+        <div class="col s12 m12">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">Total : <?php if($tid && $mid && $fid && $doc){
+                            echo $total =  ($mid->marks + $tid->marks + $fid->marks + $doc->marks)/4 ;  ?></span><br>
+                    <p> Status :
+                         <?php if($total > 40)
+                        {
+                            echo "Passed";
+                        }
+                        else
+                        {
+                            echo "Failed";
+                        }}?>
+                    </p>
+
+                </div>
+
             </div>
         </div>
 

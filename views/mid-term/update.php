@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MidTerm */
 
-$this->title = 'Update Mid Term: {nameAttribute}';
+$this->title = 'Update Mid Term: ';
 $this->params['breadcrumbs'][] = ['label' => 'Mid Terms', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

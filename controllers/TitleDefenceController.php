@@ -35,6 +35,10 @@ class TitleDefenceController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->can('student')){
+            throw new \yii\web\HttpException(404, 'The requested Item could not be found.');
+        }
+        else{
         $searchModel = new TitleDefenceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -42,7 +46,7 @@ class TitleDefenceController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }}
 
     /**
      * Displays a single TitleDefence model.
